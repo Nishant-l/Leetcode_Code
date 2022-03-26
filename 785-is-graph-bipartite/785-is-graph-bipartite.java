@@ -39,6 +39,7 @@ class Solution {
         for(int i = 0; i<vtces; i++){
             if(vis[i]==-1){
                 ans=ans&&bfs(graph,i,vis);
+                if(ans==false) return false;
             }
         }
         return ans;
