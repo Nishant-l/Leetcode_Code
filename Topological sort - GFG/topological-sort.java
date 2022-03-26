@@ -64,10 +64,12 @@ class Solution
     {
         // add your code here
         ArrayList<Integer> ans = new ArrayList<>();
-        boolean vis[] = new boolean[V];
-        
+        int vis[] = new int[V];
         for(int i = 0; i<V; i++){
-            if(!vis[i]){
+            vis[i]=-1;
+        }
+        for(int i = 0; i<V; i++){
+            if(vis[i]==-1){
                 dfs(i,adj,vis,ans);
             }
         }
@@ -82,15 +84,19 @@ class Solution
         return arrAns;
     }
     
-    static void dfs(int src, ArrayList<ArrayList<Integer>> adj, boolean vis[], ArrayList<Integer> ans){
-        vis[src] = true;
+    static void dfs(int src, ArrayList<ArrayList<Integer>> adj, int vis[], ArrayList<Integer> ans){
+        vis[src] = 1;
         
         for(int nbr: adj.get(src)){
-            if(!vis[nbr]){
+            if(vis[nbr]==1){
+                System.out.println("holla");
+            }
+            if(vis[nbr]==-1){
                 dfs(nbr,adj,vis,ans);
             }
         }
         
         ans.add(src);
+        vis[src]=2;
     }
 }
