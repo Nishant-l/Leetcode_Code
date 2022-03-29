@@ -36,7 +36,7 @@ class Solution {
         
         for(int i = 0; i<n; i++){
             for(int j = 0; j<m; j++){
-                if(grid[i][j]==1){
+                if(grid[i][j]==1 && i!=0 && j!=0 && i!=n-1 && m!=m-1){
                     ans+=dfs(grid,i,j);
                 }
             }
