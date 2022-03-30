@@ -9,10 +9,11 @@ class Solution {
         
         boolean ans = true;
         for(int i= 0; i<n; i++){
-            ans = ans&&vis[i];
+            if(vis[i]==false) return false;
+            // ans = ans&&vis[i];
         }
         
-        return ans;
+        return true;
     }
     
     public void dfs(List<List<Integer>> rooms, boolean[] vis, int i){
