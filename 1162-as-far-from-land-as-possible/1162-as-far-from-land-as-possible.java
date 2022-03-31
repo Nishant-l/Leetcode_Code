@@ -9,6 +9,7 @@ class Solution {
             for(int j = 0; j<m; j++){
                 if(grid[i][j]==1){
                     que.addLast(i*m+j);
+                    grid[i][j] = 2;
                 }
             }
         }
@@ -21,7 +22,7 @@ class Solution {
         int level = 0;
         while(que.size()>0){
             int size = que.size();
-            
+            // System.out.println("-----------------------------------"+level);
             while(size-->0){
                 int idx = que.removeFirst();
                 
@@ -30,8 +31,6 @@ class Solution {
                 
                 // if(grid[i][j]==2) continue;
                 
-                
-                
                 for(int[] dir: dirs){
                     int x = i+dir[0];
                     int y = j+dir[1];
@@ -39,6 +38,7 @@ class Solution {
                     if(x>=0 && y>=0 && x<n && y<m && grid[x][y]==0){
                         que.addLast(x*m+y);
                         grid[x][y] = 2;
+                        // System.out.println(x+"<-->"+y);
                     }
                 }
             }
