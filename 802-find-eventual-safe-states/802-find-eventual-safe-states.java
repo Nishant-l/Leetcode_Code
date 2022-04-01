@@ -1,39 +1,47 @@
 class Solution {
-    
-    public boolean dfs(int[][] graph, int[] vis, int src){
-        vis[src] = 1;
+    public List<Integer> eventualSafeNodes(int[][] graph) {
+        LinkedList<Integer> ans = new LinkedList<>();
         
-        // ArrayList<Integer> ans = new ArrayList<Integer>();
-        for(int i: graph[src]){
-            if(vis[i]==1){
-                return true;
-            }
+        int n = graph.length;
+        int m = graph[0].length;
+        
+        int[] vis = new int[n];
+        
+        for(int i = 0; i<n; i++){
             if(vis[i]==0){
-                boolean smallAns = dfs(graph,vis,i);
-                if(smallAns) return true;
+                dfs(graph,i,ans,vis);
             }
         }
         
-        vis[src] = 2;
-        return false;
+        LinkedList<Integer> newAns = new LinkedList<>();
+        
+        for(int i = 0; i<n; i++){
+            if(vis[i]==2){
+                newAns.add(i);
+            }
+        }
+        return newAns;
     }
     
-    public List<Integer> eventualSafeNodes(int[][] graph) {
-        int vtces = graph.length;
+    public boolean dfs(int[][] graph, int i, LinkedList<Integer> ans, int[] vis){
+        int n = graph.length;
+        int m = graph[0].length;
         
-        int vis[] = new int[vtces];
+        vis[i] = 1;
+        boolean hasCycle = false;
         
-        ArrayList<Integer> ans = new ArrayList<>();
-        
-        for(int i = 0; i<vtces; i++){
-            if(vis[i]==0){
-                boolean smallAns = dfs(graph,vis,i);
+        for(int nbr: graph[i]){
+            if(vis[nbr]==0){
+                hasCycle = hasCycle || dfs(graph,nbr,ans,vis);
+            }else if(vis[nbr]==1){
+                hasCycle = true;
             }
         }
         
-        for(int i = 0; i<vtces; i++){
-            if(vis[i]==2) ans.add(i);
-        }
-        return ans;
+        if(hasCycle) return true;
+        
+        ans.addLast(i);
+        vis[i] = 2;
+        return false;
     }
 }
