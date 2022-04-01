@@ -59,38 +59,38 @@ class Solution {
         return false;
     }
     
-    // public boolean bfs(ArrayList<ArrayList<Integer>> graph, int vis[], int pos){
-    //     LinkedList<Integer> que = new LinkedList<>();
+    public boolean bfs(ArrayList<ArrayList<Integer>> graph, int vis[], int pos){
+        LinkedList<Integer> que = new LinkedList<>();
         
-    //     que.addLast(pos);
+        que.addLast(pos);
         
-    //     while(que.size()>0){
-    //         int size = que.size();
+        while(que.size()>0){
+            int size = que.size();
             
-    //         while(size-->0){
-    //             int curr = que.removeFirst();
+            while(size-->0){
+                int curr = que.removeFirst();
                 
-    //             if(vis[curr] == 1) return true;
+                if(vis[curr] == 1) return true;
                 
-    //             vis[curr] = 1;
-    //             // System.out.print(curr+"-->");
-    //             for(int nbr: graph.get(curr)){
-    //                 // System.out.print(nbr);
-    //                 if(vis[nbr]==0){
-    //                     que.addLast(nbr);
-    //                 }
-    //                 // else if(nbr==curr){
-    //                 //     return true;
-    //                 // }
-    //                 else if(vis[nbr]==1){
-    //                 //     return true;
-    //                 // }
-    //             }
-    //             // System.out.println("||");
-    //             vis[curr] = 2;
-    //         }
-    //     }
+                vis[curr] = 1;
+                // System.out.print(curr+"-->");
+                for(int nbr: graph.get(curr)){
+                    // System.out.print(nbr);
+                    if(vis[nbr]==0){
+                        que.addLast(nbr);
+                    }
+                    // else if(nbr==curr){
+                    //     return true;
+                    // }
+                    // else if(vis[nbr]==1){
+                    //     return true;
+                    // }
+                }
+                // System.out.println("||");
+                // vis[curr] = 2;
+            }
+        }
         
-    //     return false;
-    // }
+        return false;
+    }
 }
