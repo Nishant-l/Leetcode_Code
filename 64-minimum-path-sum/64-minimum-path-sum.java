@@ -3,7 +3,21 @@ class Solution {
          int n = grid.length;
         int m = grid[0].length;
         int[][] memo = new int[n][m];
-        return minPath(grid,0,0,n,m,memo);
+        memo[n-1][m-1] = grid[n-1][m-1];
+        for(int i = n-2; i>=0; i--){
+            memo[i][m-1] = grid[i][m-1]+memo[i+1][m-1];
+        }
+        for(int j = m-2; j>=0; j--){
+            memo[n-1][j] = grid[n-1][j]+memo[n-1][j+1];
+        }
+    
+        for(int i = n-2; i>=0; i--){
+            for(int j = m-2; j>=0; j--){
+                memo[i][j] = Math.min(memo[i+1][j],memo[i][j+1])+grid[i][j];
+            }
+        }
+        // return minPath(grid,0,0,n,m,memo);
+        return memo[0][0];
     }
     
     public int minPath(int grid[][], int r, int c, int n, int m, int[][]memo){
